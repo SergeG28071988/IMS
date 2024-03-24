@@ -24,17 +24,23 @@ urlpatterns = [
     path('laptop/<int:pk>/detail/', views.laptop_detail, name='laptop_detail'),
     path('edit_laptop/<int:pk>/', views.edit_laptop, name='edit_laptop'),
     path('delete_laptop/<int:pk>/', views.delete_laptop, name='delete_laptop'),
+    path('search_laptops/', views.search_laptops, name='search_laptops'),
 
     path('display_desktops/', views.display_desktops, name='display_desktops'),
     path('add_desktop/', views.add_desktop, name='add_desktop'),
     path('desktop/<int:pk>/detail/', views.desktop_detail, name='desktop_detail'),
     path('edit_desktop/<int:pk>/', views.edit_desktop, name='edit_desktop'),
     path('delete_desktop/<int:pk>/', views.delete_desktop, name='delete_desktop'),
+    path('search_desktops/', views.search_desktops, name='search_desktops'),
 
     path('display_mobiles/', views.display_mobiles, name='display_mobiles'),    
     path('add_mobile/', views.add_mobile, name='add_mobile'),        
     path('mobile/<int:pk>/detail/', views.mobile_detail, name='mobile_detail'),
     path('edit_mobile/<int:pk>/', views.edit_mobile, name='edit_mobile'),
     path('delete_mobile/<int:pk>/', views.delete_mobile, name='delete_mobile'),
+    path('search_mobiles/', views.search_mobiles, name='search_mobiles'),
 
+    path('print_laptops/', views.print_laptops, name='print_laptops'),
+    path('print_desktops/', views.print_desktops, name='print_desktops'),
+    path('print_mobiles/', views.print_mobiles, name='print_mobiles'),
 ]
