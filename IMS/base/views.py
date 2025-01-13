@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.urls import reverse_lazy
 from django.views.generic.edit import  FormView
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -223,3 +224,49 @@ def delete_manufacturer(request, pk):
     manufacturers = get_object_or_404(Manufacturer, pk=pk)
     manufacturers.delete()
     return redirect("manufacturer_list")
+
+
+def search_laptops(request):
+    manufacturer = request.GET.get('manufacturer')
+    items = Laptop.objects.filter(manufacturer__name__icontains=manufacturer)
+    header = f"Search results for '{manufacturer}'"
+
+    return render(request, 'product_list.html', {'items': items, 'header': header})
+
+
+def search_desktops(request):
+    manufacturer = request.GET.get('manufacturer')
+    items = Desktop.objects.filter(manufacturer__name__icontains=manufacturer)
+    header = f"Search results for '{manufacturer}'"
+
+    return render(request, 'product_list.html', {'items': items, 'header': header})
+
+
+def search_mobiles(request):
+    manufacturer = request.GET.get('manufacturer')
+    items = Mobile.objects.filter(manufacturer__name__icontains=manufacturer)
+    header = f"Search results for '{manufacturer}'"
+
+    return render(request, 'product_list.html', {'items': items, 'header': header})
+
+
+def print_products(request, model=None):
+    if model is None:
+        # Обработка случая, когда модель не передана
+        # Например, вернуть сообщение об ошибке или перенаправить на другую страницу
+        return HttpResponse("Модель не указана")
+    
+    items = model.objects.all()
+    return render(request, 'product_list.html', {'items': items})
+
+
+def print_laptops(request):   
+    return print_products(request, Laptop)
+
+
+def print_desktops(request):    
+    return print_products(request, Desktop)
+
+
+def print_mobiles(request):    
+    return print_products(request, Mobile)
